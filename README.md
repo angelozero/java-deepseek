@@ -9,36 +9,36 @@
 - Os modelos podem ser baixados do repositório de modelos do Ollama ou de modelos disponíveis no Hugging Face.
 
 
-### Hello World com Ollama e Spring AI
+### Hello World com [Ollama e Spring AI](https://docs.spring.io/spring-ai/reference/api/chat/ollama-chat.html)
 - **Instalando Ollama**
-    - Acesse [Ollama](https://ollama.com/library/deepseek-r1) e baixe a versão **DeepSeek-R1**
-    - Após a instalação verifique se Ollama esta de pé acessando o link `http://localhost:11434/`
-    - Se tudo estiver certo, no seu navegador você deve ver a seguinte mensagem: `Ollama is running`
+  - Acesse [Ollama](https://ollama.com/library/deepseek-r1) e baixe a versão **DeepSeek-R1**
+  - Após a instalação verifique se Ollama esta de pé acessando o link `http://localhost:11434/`
+  - Se tudo estiver certo, no seu navegador você deve ver a seguinte mensagem: `Ollama is running`
 
 - **Criando uma aplicação Java**
-    - Crie uma aplicação com [Spring Initializr](https://start.spring.io/)
-        - Adicione as seguintes depências na criação
-            - *Spring Web*
-            - *Ollama*
+  - Crie uma aplicação com [Spring Initializr](https://start.spring.io/)
+    - Adicione as seguintes depências na criação
+      - *Spring Web*
+      - *Ollama*
 
-    - Após o projeto criado, importe no [IntelliJ](https://www.jetbrains.com/pt-br/idea/download/)
-    - Confira se no arquivo `pom.xml` se a seguinte dependência foi adicionada
+  - Após o projeto criado, importe no [IntelliJ](https://www.jetbrains.com/pt-br/idea/download/)
+  - Confira no arquivo `pom.xml` se a seguinte dependência foi adicionada
     ```xml
     <dependency>
         <groupId>org.springframework.ai</groupId>
         <artifactId>spring-ai-ollama-spring-boot-starter</artifactId>
     </dependency>
     ```
-    - Agora no seu arquivo `application.properties` adicione as seguintes propiedades
+  - Agora no seu arquivo `application.properties` adicione as seguintes propiedades
     ```shell
     spring.application.name=spring-ai-deepseek
     spring.ai.ollama.base-url=http://localhost:11434/
     spring.ai.ollama.chat.options.model=deepseek-r1:1.5b
     ```
-    - O valor para `spring.ai.ollama.chat.options.model=` precisa ser respectivo ao utilizado no momento em que foi instalado Ollama
-        - *Ex.: `ollama run deepseek-r1:1.5b`*
+  - O valor para `spring.ai.ollama.chat.options.model=` precisa ser respectivo ao utilizado no momento em que foi instalado Ollama
+    - *Ex.: `ollama run deepseek-r1:1.5b`*
 
-    - Primeiro criamos uma classe de configuração para prover a comunicação com o *client*
+  - Primeiro criamos uma classe de configuração para prover a comunicação com o *client*
     ```java
     import org.springframework.ai.chat.client.ChatClient;
     import org.springframework.context.annotation.Bean;
@@ -54,7 +54,7 @@
     }
     ```
 
-    - Criamos uma classe de serviço que chama os métodos de comunicação com a IA
+  - Criamos uma classe de serviço que chama os métodos de comunicação com a IA
     ```java
     import lombok.AllArgsConstructor;
     import org.springframework.ai.chat.client.ChatClient;
@@ -77,7 +77,7 @@
     }
     ```
 
-    - Por fim criamos um *Controller* para testar as chamadas
+  - Por fim criamos um *Controller* para testar as chamadas
     ```java
     @RestController
     @RequestMapping("/ai-api")
@@ -98,15 +98,15 @@
     }
     ```
 
-    - Para testar a API localmente acesse `http://localhost:8080/ai-api`
-    - Body para envio
+  - Para testar a API localmente acesse `http://localhost:8080/ai-api`
+  - Body para envio
     ```json
     {
         "question": "Short answer: why is the color of the sky blue?"
     }
     ```
 
-    - Resposta
+  - Resposta
     ```xml
     <think>
         Okay, so I'm trying to figure out why the sky is blue. I remember that when I look up at the sky outside, it's mostly clear blue. But why does that happen? I think it has something to do with how light interacts with the atmosphere.
